@@ -30,8 +30,15 @@ spec:
         control-plane: controller-manager
         app.kubernetes.io/instance: sap-btp-operator
         app.kubernetes.io/name: sap-btp-operator
+        {{- if .Values.manager.labels }}
+        {{- toYaml .Values.manager.labels | nindent 8 }}
+        {{- end }}
     spec:
       serviceAccountName: sap-btp-operator
+      {{- if .Values.manager.podSecurityContext }}
+      securityContext:
+      {{- toYaml .Values.manager.podSecurityContext | nindent 8 }}
+      {{- end }}
       containers:
         - args:
             - --secure-listen-address=0.0.0.0:8443
