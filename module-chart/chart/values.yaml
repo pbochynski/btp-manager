@@ -16,7 +16,7 @@ manager:
   management_namespace:
   image:
     repository: ghcr.io/sap/sap-btp-service-operator/controller
-    tag: v0.7.4
+    tag: v0.9.5
     sha: ""
   secret:
     b64encoded: false
@@ -34,13 +34,14 @@ manager:
     image:
       repository: quay.io/brancz/kube-rbac-proxy
       sha: ""
-      tag: v0.15.0
+      tag: v0.20.0
     memory_limit: ""
     cpu_limit: ""
     req_memory_limit: ""
     req_cpu_limit: ""
   imagePullSecrets: []
   #   - name: registrySecretName
+  disablePreDeleteJob: false
   pullSecretTemplate:
   # creates a secret to be used in imagePullSecrets from a template
   # output of data will be in form {"auths":{"myhost":{"auth":<encoded username:password>},"myhost1":{"auth":<encoded username:password>}}}
@@ -84,6 +85,15 @@ manager:
   #securityContext:
   #   runAsNonRoot: true
   securityContext: {}
+  # Example of adding security context for the pod
+  #podSecurityContext:
+  #   runAsUser: 1000
+  #   runAsNonRoot: true
+  #   fsGroup: 1000
+  podSecurityContext: {}
+  # Custom CA certificates for HTTPS connections to SAP BTP
+#  customCACerts:
+#    - "" # base64 encoded PEM
   health_service:
     enabled: false
   kubernetesMatchLabels:
@@ -93,7 +103,7 @@ cluster:
 externalImages:
   kubectl:
     image:
-      repository: bitnami/kubectl
+      repository: bitnamisecure/kubectl
       sha: ""
       tag: latest
 # Option for adding annotations to configmap
