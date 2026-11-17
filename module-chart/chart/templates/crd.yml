@@ -2,7 +2,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.16.1
+    controller-gen.kubebuilder.io/version: v0.17.2
   name: servicebindings.services.cloud.sap.com
 spec:
   group: services.cloud.sap.com
@@ -76,6 +76,7 @@ spec:
                 type: object
               externalName:
                 description: The name of the binding in Service Manager
+                maxLength: 100
                 type: string
               parameters:
                 description: |-
@@ -167,23 +168,25 @@ spec:
                       items:
                         type: string
                       type: array
-                    description: Any additional information provided by the authenticator.
+                    description: extra is any additional information provided by the
+                      authenticator.
                     type: object
                   groups:
-                    description: The names of groups this user is a part of.
+                    description: groups is the names of groups this user is a part
+                      of.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: atomic
                   uid:
                     description: |-
-                      A unique value that identifies this user across time. If this user is
+                      uid is a unique value that identifies this user across time. If this user is
                       deleted and another user by the same name is added, they will have
                       different UIDs.
                     type: string
                   username:
-                    description: The name that uniquely identifies this user among
-                      all active users.
+                    description: username is the name that uniquely identifies this
+                      user among all active users.
                     type: string
                 type: object
             required:
@@ -192,6 +195,8 @@ spec:
           status:
             description: ServiceBindingStatus defines the observed state of ServiceBinding
             properties:
+              asyncBindFailed:
+                type: boolean
               bindingID:
                 description: The generated ID of the binding, will be automatically
                   filled once the binding is created
@@ -260,6 +265,10 @@ spec:
                 description: Indicates when binding secret was rotated
                 format: date-time
                 type: string
+              observedGeneration:
+                description: Last generation that was acted on
+                format: int64
+                type: integer
               operationType:
                 description: The operation type (CREATE/UPDATE/DELETE) for ongoing
                   operation
@@ -344,6 +353,7 @@ spec:
                 type: object
               externalName:
                 description: The name of the binding in Service Manager
+                maxLength: 100
                 type: string
               parameters:
                 description: |-
@@ -418,23 +428,25 @@ spec:
                       items:
                         type: string
                       type: array
-                    description: Any additional information provided by the authenticator.
+                    description: extra is any additional information provided by the
+                      authenticator.
                     type: object
                   groups:
-                    description: The names of groups this user is a part of.
+                    description: groups is the names of groups this user is a part
+                      of.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: atomic
                   uid:
                     description: |-
-                      A unique value that identifies this user across time. If this user is
+                      uid is a unique value that identifies this user across time. If this user is
                       deleted and another user by the same name is added, they will have
                       different UIDs.
                     type: string
                   username:
-                    description: The name that uniquely identifies this user among
-                      all active users.
+                    description: username is the name that uniquely identifies this
+                      user among all active users.
                     type: string
                 type: object
             required:
@@ -538,7 +550,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.16.1
+    controller-gen.kubebuilder.io/version: v0.17.2
   name: serviceinstances.services.cloud.sap.com
 spec:
   group: services.cloud.sap.com
@@ -688,23 +700,25 @@ spec:
                       items:
                         type: string
                       type: array
-                    description: Any additional information provided by the authenticator.
+                    description: extra is any additional information provided by the
+                      authenticator.
                     type: object
                   groups:
-                    description: The names of groups this user is a part of.
+                    description: groups is the names of groups this user is a part
+                      of.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: atomic
                   uid:
                     description: |-
-                      A unique value that identifies this user across time. If this user is
+                      uid is a unique value that identifies this user across time. If this user is
                       deleted and another user by the same name is added, they will have
                       different UIDs.
                     type: string
                   username:
-                    description: The name that uniquely identifies this user among
-                      all active users.
+                    description: username is the name that uniquely identifies this
+                      user among all active users.
                     type: string
                 type: object
               watchParametersFromChanges:
@@ -785,6 +799,10 @@ spec:
                 description: The generated ID of the instance, will be automatically
                   filled once the instance is created
                 type: string
+              observedGeneration:
+                description: Last generation that was acted on
+                format: int64
+                type: integer
               operationType:
                 description: The operation type (CREATE/UPDATE/DELETE) for ongoing
                   operation
@@ -937,23 +955,25 @@ spec:
                       items:
                         type: string
                       type: array
-                    description: Any additional information provided by the authenticator.
+                    description: extra is any additional information provided by the
+                      authenticator.
                     type: object
                   groups:
-                    description: The names of groups this user is a part of.
+                    description: groups is the names of groups this user is a part
+                      of.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: atomic
                   uid:
                     description: |-
-                      A unique value that identifies this user across time. If this user is
+                      uid is a unique value that identifies this user across time. If this user is
                       deleted and another user by the same name is added, they will have
                       different UIDs.
                     type: string
                   username:
-                    description: The name that uniquely identifies this user among
-                      all active users.
+                    description: username is the name that uniquely identifies this
+                      user among all active users.
                     type: string
                 type: object
             required:
